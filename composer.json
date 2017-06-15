@@ -1,0 +1,21 @@
+{
+    "name": "robjr/collections",
+    "description": "Data structures",
+    "type": "library",
+    "license": "MIT",
+    "minimum-stability": "dev",
+    "require": {
+        "php": "^7.1.4"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^6.1",
+        "squizlabs/php_codesniffer": "^2.0",
+        "phpmd/phpmd": "^2.0"
+    },
+    "autoload": {
+        "psr-4": {"Collections\\": "src/"}
+    },
+    "autoload-dev": {
+        "psr-4": {"Collections\\Tests\\": "src/"}
+    }
+}
