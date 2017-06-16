@@ -2,9 +2,7 @@ FROM php:7.1.4
 ENV XDEBUGINI=/usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini
 ARG host
 RUN pecl install xdebug-2.5.0 \
-    && docker-php-ext-install opcache \
-    && docker-php-ext-enable xdebug \
-    && docker-php-ext-enable opcache
+    && docker-php-ext-enable xdebug
 
 RUN sed -i '1 a xdebug.remote_autostart=true' $XDEBUGINI
 RUN sed -i '1 a xdebug.remote_handler=dbgp' $XDEBUGINI
