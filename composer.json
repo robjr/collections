@@ -16,6 +16,6 @@
         "psr-4": {"Collections\\": "src/"}
     },
     "autoload-dev": {
-        "psr-4": {"Collections\\Tests\\": "src/"}
+        "psr-4": {"Collections\\Tests\\": "tests/"}
     }
 }
