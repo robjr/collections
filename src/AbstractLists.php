@@ -5,19 +5,19 @@ abstract class AbstractLists extends AbstractCollection implements Lists
 {
     abstract public function addAt(int $index, $element): void;
 
+    /**
+     * Appends the $element to the end of this list.
+     *
+     * @param mixed $element The $element to be appended to the end of this list.
+     */
     public function add($element): void
     {
         $this->addAt($this->count(), $element);
     }
 
-    public function remove($element): void
+    public function first()
     {
-        foreach ($this as $key => $listElement) {
-            if ($listElement === $element) {
-                $this->removeAt($key);
-                return;
-            }
-        }
+        return $this->get(0);
     }
 
     public function firstIndexOf($element): int
@@ -29,6 +29,11 @@ abstract class AbstractLists extends AbstractCollection implements Lists
         }
 
         return -1;
+    }
+
+    public function last()
+    {
+        return $this->get($this->count() - 1);
     }
 
     public function lastIndexOf($element): int
@@ -44,14 +49,21 @@ abstract class AbstractLists extends AbstractCollection implements Lists
         return $pos;
     }
 
-    public function first()
+    /**
+     * {@inheritdoc}
+     *
+     * Note that strict comparison is used to determine if $element is present in this collection and should be removed.
+     *
+     * @param mixed $element {@inheritdoc}
+     */
+    public function remove($element): void
     {
-        return $this->get(0);
-    }
-
-    public function last()
-    {
-        return $this->get($this->count() - 1);
+        foreach ($this as $key => $listElement) {
+            if ($listElement === $element) {
+                $this->removeAt($key);
+                return;
+            }
+        }
     }
 
     public function replace(int $index, $element): void
