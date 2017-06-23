@@ -26,10 +26,18 @@ class ArrayList extends AbstractLists implements Lists, \ArrayAccess
     }
 
     /**
-     * @todo check if index exists
+     * {@inheritdoc}
+     *
+     * @param int $index {@inheritdoc}
+     * @return mixed {@inheritdoc}
+     * @throws \OutOfBoundsException {@inheritdoc}
      */
     public function get(int $index)
     {
+        if (!$this->offsetExists($index)) {
+            throw new \OutOfBoundsException(sprintf('The index "%d" doesn\'t exist.', $index));
+        }
+
         return $this->elements[$index];
     }
 
@@ -43,7 +51,7 @@ class ArrayList extends AbstractLists implements Lists, \ArrayAccess
 
     public function offsetExists($offset): bool
     {
-        return is_int($offset) && $offset < $this->count();
+        return isset($this->elements[$offset]);
     }
 
     public function offsetGet($offset)

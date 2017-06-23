@@ -21,11 +21,37 @@ abstract class ListsTest extends CollectionTest
         $this->assertEquals(2, $list->get(1));
     }
 
+    /**
+     * @param int $index
+     *
+     * @dataProvider indexOutOfBoundsProvider
+     */
+    public function testGetOutOfBoundsException(int $index): void
+    {
+        $this->expectException(\OutOfBoundsException::class);
+
+        $list = $this->createLists(1);
+        $list->get($index);
+    }
+
+    public function indexOutOfBoundsProvider(): array
+    {
+        return [[-1], [1], [100]];
+    }
+
     public function testFirst(): void
     {
         $list = $this->createLists(1, 2);
         
         $this->assertEquals(1, $list->first());
+    }
+
+    public function testFirstException(): void
+    {
+        $this->expectException(\OutOfBoundsException::class);
+
+        $list = $this->createLists();
+        $list->first();
     }
 
     public function testFirstIndexOf(): void
@@ -41,6 +67,14 @@ abstract class ListsTest extends CollectionTest
         $list = $this->createLists(1, 2);
 
         $this->assertEquals(2, $list->last());
+    }
+
+    public function testLastException(): void
+    {
+        $this->expectException(\OutOfBoundsException::class);
+
+        $list = $this->createLists();
+        $list->last();
     }
 
     public function testLastIndexOf(): void
@@ -68,16 +102,22 @@ abstract class ListsTest extends CollectionTest
         $list->addAt(1, 1);
         $this->assertEquals(0, $list->get(0));
         $this->assertEquals(1, $list->get(1));
+
+        $list->addAt(0, 2);
+        $list->addAt(2, 3);
+        $list->addAt(4, 4);
+        $this->assertArraySubset([2, 0, 3, 1, 4], $list->toArray());
     }
 
     public function testReplace(): void
     {
-        $list = $this->createLists(7, 7);
+        $list = $this->createLists(4, 5, 6);
 
         $list->replace(0, 1);
         $list->replace(1, 2);
+        $list->replace(2, 3);
 
-        $this->assertArraySubset([1, 2], $list->toArray());
+        $this->assertArraySubset([1, 2, 3], $list->toArray());
     }
 
     public function testSubList(): void
