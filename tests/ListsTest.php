@@ -13,6 +13,33 @@ abstract class ListsTest extends CollectionTest
         return $this->createLists(...$elements);
     }
 
+    public function testAddAt(): void
+    {
+        $list = $this->createLists();
+
+        $list->addAt(0, 0);
+        $list->addAt(1, 1);
+        $this->assertEquals(0, $list->get(0));
+        $this->assertEquals(1, $list->get(1));
+
+        $list->addAt(0, 2);
+        $list->addAt(2, 3);
+        $list->addAt(4, 4);
+        $this->assertArraySubset([2, 0, 3, 1, 4], $list->toArray());
+    }
+
+    /**
+     * @param int $index
+     * @dataProvider indexOutOfBoundsProvider
+     */
+    public function testAddAtOufOfRangeException(int $index): void
+    {
+        $this->expectException(\OutOfBoundsException::class);
+
+        $list = $this->createLists();
+        $list->addAt($index, 1);
+    }
+
     public function testGet(): void
     {
         $list = $this->createLists(1, 2);
@@ -32,11 +59,6 @@ abstract class ListsTest extends CollectionTest
 
         $list = $this->createLists(1);
         $list->get($index);
-    }
-
-    public function indexOutOfBoundsProvider(): array
-    {
-        return [[-1], [1], [100]];
     }
 
     public function testFirst(): void
@@ -94,19 +116,21 @@ abstract class ListsTest extends CollectionTest
         $this->assertCount(2, $list);
     }
 
-    public function testAddAt(): void
+    /**
+     * @param int $index
+     * @dataProvider indexOutOfBoundsProvider
+     */
+    public function testRemoveAtException(int $index): void
     {
+        $this->expectException(\OutOfBoundsException::class);
         $list = $this->createLists();
-        
-        $list->addAt(0, 0);
-        $list->addAt(1, 1);
-        $this->assertEquals(0, $list->get(0));
-        $this->assertEquals(1, $list->get(1));
 
-        $list->addAt(0, 2);
-        $list->addAt(2, 3);
-        $list->addAt(4, 4);
-        $this->assertArraySubset([2, 0, 3, 1, 4], $list->toArray());
+        $list->removeAt($index);
+    }
+
+    public function indexOutOfBoundsProvider(): array
+    {
+        return [[-1], [1], [100]];
     }
 
     public function testReplace(): void
