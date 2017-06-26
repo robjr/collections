@@ -1,7 +1,7 @@
 <?php
 namespace Collections;
 
-abstract class AbstractLists extends AbstractCollection implements Lists
+abstract class AbstractList extends AbstractCollection implements ListInterface
 {
     abstract public function addAt(int $index, $element): void;
 
@@ -84,9 +84,9 @@ abstract class AbstractLists extends AbstractCollection implements Lists
         $this->addAt($index, $element);
     }
 
-    public function subList(int $start, int $end): Lists
+    public function subList(int $start, int $end): ListInterface
     {
-        /** @var AbstractLists $sublist */
+        /** @var AbstractList $sublist */
         $sublist = new $this();
 
         for (; $start <= $end; $start++) {

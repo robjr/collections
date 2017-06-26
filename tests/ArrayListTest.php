@@ -2,11 +2,11 @@
 namespace Collections\Tests;
 
 use Collections\ArrayList;
-use Collections\Lists;
+use Collections\ListInterface;
 
-class ArrayListTest extends ListsTest
+class ArrayListTest extends BaseListTest
 {
-    public function createLists(...$elements): Lists
+    public function createList(...$elements): ListInterface
     {
         return $this->createArrayList(...$elements);
     }

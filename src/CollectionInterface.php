@@ -1,7 +1,7 @@
 <?php
 namespace Collections;
 
-interface Collection extends \IteratorAggregate, \Countable
+interface CollectionInterface extends \IteratorAggregate, \Countable
 {
     /**
      * Adds the $element to this collection.
@@ -13,10 +13,10 @@ interface Collection extends \IteratorAggregate, \Countable
     /**
      * Adds to this collection all the $elements from $collection.
      *
-     * @param Collection $collection
+     * @param CollectionInterface $collection
      * @see add
      */
-    public function addAll(Collection $collection): void;
+    public function addAll(CollectionInterface $collection): void;
 
     /**
      * Removes all the elements from this collection.
@@ -42,11 +42,12 @@ interface Collection extends \IteratorAggregate, \Countable
     /**
      * Returns true if all the elements in $collection is present in this collection.
      *
-     * @param Collection $collection Collection containing all the elements that should be present in this collection.
+     * @param CollectionInterface $collection Collection containing all the elements that should be present
+     *                                        in this collection.
      * @return bool True if the all elements in $collection are in this collection. False, otherwise.
      * @see contains
      */
-    public function containsAll(Collection $collection): bool;
+    public function containsAll(CollectionInterface $collection): bool;
 
     /**
      * Returns an iterator over the elements in this collection.
@@ -74,10 +75,10 @@ interface Collection extends \IteratorAggregate, \Countable
     /**
      * Removes from this collection one instance of each element of $collection.
      *
-     * @param Collection $collection
+     * @param CollectionInterface $collection
      * @see remove
      */
-    public function removeAll(Collection $collection): void;
+    public function removeAll(CollectionInterface $collection): void;
 
     /**
      * Returns an array containing all the elements of this collection.

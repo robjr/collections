@@ -1,7 +1,7 @@
 <?php
 namespace Collections;
 
-abstract class AbstractCollection implements Collection
+abstract class AbstractCollection implements CollectionInterface
 {
     /**
      * {@inheritdoc}
@@ -39,10 +39,10 @@ abstract class AbstractCollection implements Collection
     /**
      * {@inheritdoc}
      *
-     * @param Collection $collection {@inheritdoc}
+     * @param CollectionInterface $collection {@inheritdoc}
      * @see add
      */
-    public function addAll(Collection $collection): void
+    public function addAll(CollectionInterface $collection): void
     {
         foreach ($collection as $object) {
             $this->add($object);
@@ -80,7 +80,7 @@ abstract class AbstractCollection implements Collection
      * @return bool {@inheritdoc}
      * @see contains
      */
-    public function containsAll(Collection $collection): bool
+    public function containsAll(CollectionInterface $collection): bool
     {
         foreach ($collection as $object) {
             if (!$this->contains($object)) {
@@ -104,10 +104,10 @@ abstract class AbstractCollection implements Collection
     /**
      * {@inheritdoc}
      *
-     * @param Collection $collection {@inheritdoc}
+     * @param CollectionInterface $collection {@inheritdoc}
      * @see remove
      */
-    public function removeAll(Collection $collection): void
+    public function removeAll(CollectionInterface $collection): void
     {
         foreach ($collection as $object) {
             $this->remove($object);

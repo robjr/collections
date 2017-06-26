@@ -1,21 +1,21 @@
 <?php
 namespace Collections\Tests;
 
-use Collections\Collection;
-use Collections\Lists;
+use Collections\CollectionInterface;
+use Collections\ListInterface;
 
-abstract class ListsTest extends CollectionTest
+abstract class BaseListTest extends BaseCollectionTest
 {
-    abstract public function createLists(...$elements): Lists;
+    abstract public function createList(...$elements): ListInterface;
 
-    public function createCollection(...$elements): Collection
+    public function createCollection(...$elements): CollectionInterface
     {
-        return $this->createLists(...$elements);
+        return $this->createList(...$elements);
     }
 
     public function testAddAt(): void
     {
-        $list = $this->createLists();
+        $list = $this->createList();
 
         $list->addAt(0, 0);
         $list->addAt(1, 1);
@@ -36,13 +36,13 @@ abstract class ListsTest extends CollectionTest
     {
         $this->expectException(\OutOfBoundsException::class);
 
-        $list = $this->createLists();
+        $list = $this->createList();
         $list->addAt($index, 1);
     }
 
     public function testGet(): void
     {
-        $list = $this->createLists(1, 2);
+        $list = $this->createList(1, 2);
 
         $this->assertEquals(1, $list->get(0));
         $this->assertEquals(2, $list->get(1));
@@ -57,13 +57,13 @@ abstract class ListsTest extends CollectionTest
     {
         $this->expectException(\OutOfBoundsException::class);
 
-        $list = $this->createLists(1);
+        $list = $this->createList(1);
         $list->get($index);
     }
 
     public function testFirst(): void
     {
-        $list = $this->createLists(1, 2);
+        $list = $this->createList(1, 2);
         
         $this->assertEquals(1, $list->first());
     }
@@ -72,13 +72,13 @@ abstract class ListsTest extends CollectionTest
     {
         $this->expectException(\OutOfBoundsException::class);
 
-        $list = $this->createLists();
+        $list = $this->createList();
         $list->first();
     }
 
     public function testFirstIndexOf(): void
     {
-        $list = $this->createLists(7, 7, 7);
+        $list = $this->createList(7, 7, 7);
         
         $this->assertEquals(0, $list->firstIndexOf(7));
         $this->assertEquals(-1, $list->firstIndexOf(8));
@@ -86,7 +86,7 @@ abstract class ListsTest extends CollectionTest
 
     public function testLast(): void
     {
-        $list = $this->createLists(1, 2);
+        $list = $this->createList(1, 2);
 
         $this->assertEquals(2, $list->last());
     }
@@ -95,13 +95,13 @@ abstract class ListsTest extends CollectionTest
     {
         $this->expectException(\OutOfBoundsException::class);
 
-        $list = $this->createLists();
+        $list = $this->createList();
         $list->last();
     }
 
     public function testLastIndexOf(): void
     {
-        $list = $this->createLists(7, 7, 7);
+        $list = $this->createList(7, 7, 7);
         
         $this->assertEquals(2, $list->lastIndexOf(7));
         $this->assertEquals(-1, $list->lastIndexOf(8));
@@ -109,7 +109,7 @@ abstract class ListsTest extends CollectionTest
 
     public function testRemoveAt(): void
     {
-        $list = $this->createLists(1, 2, 3);
+        $list = $this->createList(1, 2, 3);
         
         $list->removeAt(1);
         $this->assertEquals(3, $list->get(1));
@@ -123,7 +123,7 @@ abstract class ListsTest extends CollectionTest
     public function testRemoveAtException(int $index): void
     {
         $this->expectException(\OutOfBoundsException::class);
-        $list = $this->createLists();
+        $list = $this->createList();
 
         $list->removeAt($index);
     }
@@ -135,7 +135,7 @@ abstract class ListsTest extends CollectionTest
 
     public function testReplace(): void
     {
-        $list = $this->createLists(4, 5, 6);
+        $list = $this->createList(4, 5, 6);
 
         $list->replace(0, 1);
         $list->replace(1, 2);
@@ -146,7 +146,7 @@ abstract class ListsTest extends CollectionTest
 
     public function testSubList(): void
     {
-        $list = $this->createLists(1, 2, 3, 4);
+        $list = $this->createList(1, 2, 3, 4);
 
         $sublist = $list->subList(1, 2);
         $this->assertArraySubset([2, 3], $sublist->toArray());

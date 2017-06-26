@@ -1,7 +1,7 @@
 <?php
 namespace Collections;
 
-class ArrayList extends AbstractLists implements Lists, \ArrayAccess
+class ArrayList extends AbstractList implements ListInterface, \ArrayAccess
 {
     /** @var array */
     protected $elements;

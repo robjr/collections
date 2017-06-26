@@ -1,12 +1,12 @@
 <?php
 namespace Collections\Tests;
 
-use Collections\Collection;
+use Collections\CollectionInterface;
 use PHPUnit\Framework\TestCase;
 
-abstract class CollectionTest extends TestCase
+abstract class BaseCollectionTest extends TestCase
 {
-    abstract public function createCollection(...$elements): Collection;
+    abstract public function createCollection(...$elements): CollectionInterface;
 
     public function testToArray(): void
     {

@@ -6,15 +6,15 @@ class ListIterator implements \Iterator
     /** @var int **/
     private $cursor = 0;
 
-    /** @var Lists */
+    /** @var ListInterface */
     private $list;
 
     /**
      * ListIterator constructor.
      *
-     * @param Lists $list
+     * @param ListInterface $list
      */
-    public function __construct(Lists $list)
+    public function __construct(ListInterface $list)
     {
         $this->list = $list;
     }

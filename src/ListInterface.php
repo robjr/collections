@@ -1,7 +1,7 @@
 <?php
 namespace Collections;
 
-interface Lists extends Collection
+interface ListInterface extends CollectionInterface
 {
     /**
      * Inserts the $element at the specified position.
@@ -66,8 +66,8 @@ interface Lists extends Collection
     /**
      * @param int $start
      * @param int $end
-     * @return Lists
+     * @return ListInterface
      * @throws \OutOfRangeException
      */
-    public function subList(int $start, int $end): Lists;
+    public function subList(int $start, int $end): ListInterface;
 }
