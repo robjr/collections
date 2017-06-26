@@ -15,6 +15,12 @@ abstract class AbstractLists extends AbstractCollection implements Lists
         $this->addAt($this->count(), $element);
     }
 
+    /**
+     * {@inheritdoc}
+     *
+     * @return mixed {@inheritdoc}
+     * @throws \OutOfBoundsException {@inheritdoc}
+     */
     public function first()
     {
         return $this->get(0);
@@ -31,6 +37,12 @@ abstract class AbstractLists extends AbstractCollection implements Lists
         return -1;
     }
 
+    /**
+     * {@inheritdoc}
+     *
+     * @return mixed {@inheritdoc}
+     * @throws \OutOfBoundsException {@inheritdoc}
+     */
     public function last()
     {
         return $this->get($this->count() - 1);
